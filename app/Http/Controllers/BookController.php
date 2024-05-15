@@ -12,9 +12,18 @@ use App\Models\Book;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('books.list');
+        $books = Book::orderBy('created_at','DESC');
+        
+        if(!empty($request->keyword)) {
+
+            $books->where('title','like','%'.$request->keyword.'%');
+        }
+
+        $books = $books->paginate(10);
+
+        return view('books.list',['books'=>$books]);
     }
 
     public function creata()
@@ -24,7 +33,6 @@ class BookController extends Controller
 
     public function store(Request $request)
     {
-
         $rules = [
             'title' => 'required|min:5',
             'author' => 'required|min:4',
