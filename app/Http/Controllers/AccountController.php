@@ -77,17 +77,16 @@ class AccountController extends Controller
     //This method will update user information
     public function update(Request $request){
 
-        if(!empty($request->image)){
-            $rules['image'] = 'image';
-        }
-
         $rules = [
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users,email,'.Auth::user()->id.',id',
         ];
 
     
-
+        if(!empty($request->image)){
+            $rules['image'] = 'image';
+        }
+        
         $validator = Validator::make($request->all(),$rules);
 
         if($validator->fails())
@@ -119,7 +118,7 @@ class AccountController extends Controller
         $manager = new ImageManager(Driver::class);
         $img = $manager->read(public_path('uploads/profile/'.$imageName));
 
-        $img->cover(150, 150);
+        $img->resize(150, 150);
         $img->save(public_path('uploads/profile/thum/'.$imageName));
 
         }
