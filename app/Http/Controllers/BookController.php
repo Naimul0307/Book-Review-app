@@ -140,8 +140,27 @@ class BookController extends Controller
         return redirect()->route('books.index')->with('success','Book update successfully.');
     }
 
-    public function destroy()
+    public function destroy(Request $request)
     {
+        $book = Book::find($request->id);
 
+        if($book == null)
+        {
+            session()->flash('érror','Book not find');
+            return response()->json([
+                'status' => false,
+                'message' => 'Book not find'
+            ]);
+        } else {
+            File::delete(public_path('uploads/books/'.$book->image));
+            File::delete(public_path('uploads/books/thum/'.$book->image));
+            $book->delete();
+
+            session()->flash('success','Book deleted successfully!');
+            return response()->json([
+                'status' => true,
+                'message' => 'Book deleted successfully!'
+            ]);
+        }
     }
 }
