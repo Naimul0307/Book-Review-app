@@ -7,13 +7,13 @@
             <div class="col-md-3">
                 <div class="card border-0 shadow-lg">
                     <div class="card-header  text-white">
-                        Welcome, {{ Auth::user()->name }}                        
+                        Welcome, {{ Auth::user()->name }}
                     </div>
                     <div class="card-body">
                         <div class="text-center mb-3">
-                           @if(Auth::user()->image != "") 
-                           <img src="{{ asset('uploads/profile/thum/'.Auth::user()->image) }}" class="img-fluid rounded-circle" alt="{{ Auth::user()->name }}">  
-                           @endif                    
+                           @if(Auth::user()->image != "")
+                           <img src="{{ asset('uploads/profile/thum/'.Auth::user()->image) }}" class="img-fluid rounded-circle" alt="{{ Auth::user()->name }}">
+                           @endif
                         </div>
                         <div class="h5 text-center">
                             <strong>{{ Auth::user()->name }}  </strong>
@@ -36,9 +36,9 @@
                     <div class="card-header  text-white">
                         Books
                     </div>
-                    <div class="card-body pb-0">     
+                    <div class="card-body pb-0">
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('books.create') }}" class="btn btn-primary">Add Book</a> 
+                            <a href="{{ route('books.create') }}" class="btn btn-primary">Add Book</a>
                                 <form action="" method="get">
                                     <div class="d-flex">
                                     <input type="text" class="form-control" valu="{{ Request::get('keyword') }}" name="keyword" placeholder="Keyword">
@@ -46,7 +46,7 @@
                                     <a href="{{ route('books.index') }}" class="btn btn-secondary ms-2">Clear</a>
                                 </div>
                                 </form>
-                        </div>                  
+                        </div>
                         <table class="table  table-striped mt-3">
                             <thead class="table-dark">
                                 <tr>
@@ -72,12 +72,12 @@
                                         </td>
                                         <td>
                                             <a href="#" class="btn btn-success btn-sm"><i class="fa-regular fa-star"></i></a>
-                                            <a href="edit-book.html" class="btn btn-primary btn-sm"><i class="fa-regular fa-pen-to-square"></i>
+                                            <a href="{{ route('books.edit',$book->id) }}" class="btn btn-primary btn-sm"><i class="fa-regular fa-pen-to-square"></i>
                                             </a>
                                             <a href="" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
-                                    @endforeach 
+                                    @endforeach
                                     @else
                                     <tr>
                                         <td colspan="5">
@@ -87,15 +87,15 @@
                                     @endif
                                 </tbody>
                             </thead>
-                        </table>  
+                        </table>
                         @if ($books->isNotEmpty())
-                        {{ $books->links() }}  
-                        @endif                
+                        {{ $books->links() }}
+                        @endif
                     </div>
-                    
-                </div>                
+
+                </div>
             </div>
-        </div>       
+        </div>
     </div>
 </section>
 @endsection
