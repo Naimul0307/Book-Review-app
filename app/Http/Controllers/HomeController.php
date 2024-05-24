@@ -16,10 +16,26 @@ class HomeController extends Controller
             $books->where('title','like','%'.$request->keyword.'%');
         }
 
-       $books = $books->where('status',1)->paginate(3);
+       $books = $books->where('status',1)->paginate(4);
 
         return view('home',[
             'books' => $books
+        ]);
+    }
+
+    //This method will show book details
+    public function detail($id)
+    {
+        $book = Book::findOrFail($id);
+
+        if($book->status == 0) {
+            abort(404);
+        }
+        $relatedBooks = Book::where('status',1)->take(3)->where('id' ,'!=' ,$id)->inRandomOrder()->get();
+
+        return view('book-detail',[
+            'book' => $book,
+            'relatedBooks' => $relatedBooks
         ]);
     }
 }

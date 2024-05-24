@@ -20,7 +20,7 @@ class BookController extends Controller
             $books->where('title','like','%'.$request->keyword.'%');
         }
 
-        $books = $books->paginate(10);
+        $books = $books->paginate(5);
 
         return view('books.list',['books'=>$books]);
     }
@@ -52,10 +52,9 @@ class BookController extends Controller
         $book->title = $request->title;
         $book->author = $request->author;
         $book->status = $request->status;
-        $book->discription = $request->discription;
+        $book->description = $request->description;
         $book->save();
-
-               //Here we will uploade image
+        //Here we will uploade image
         if(!empty($request->image)) {
 
         //Delete old image here
@@ -74,7 +73,7 @@ class BookController extends Controller
         $manager = new ImageManager(Driver::class);
         $img = $manager->read(public_path('uploads/books/'.$imageName));
 
-        $img->resize(990);
+        $img->resize(860);
         $img->save(public_path('uploads/books/thum/'.$imageName));
 
         }
@@ -111,7 +110,7 @@ class BookController extends Controller
         $book->title = $request->title;
         $book->author = $request->author;
         $book->status = $request->status;
-        $book->discription = $request->discription;
+        $book->description = $request->description;
         $book->save();
 
         //Here we will uploade image

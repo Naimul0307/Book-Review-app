@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\File;
 class AccountController extends Controller
 {
     //This method will show register page
-   
+
     public function register(){
         return view('account.register');
     }
@@ -32,7 +32,7 @@ class AccountController extends Controller
         if($validator->fails()) {
             return redirect()->route('account.register')->withInput()->withErrors($validator);
         }
-        
+
         //Now Register User
         $user = new User();
         $user->name = $request->name;
@@ -65,7 +65,7 @@ class AccountController extends Controller
         }
     }
 
-    //This method will show user details in profile page 
+    //This method will show user details in profile page
     public function profile(){
         $user = User::find(Auth::user()->id);
        // dd($user);
@@ -82,11 +82,11 @@ class AccountController extends Controller
             'email' => 'required|email|unique:users,email,'.Auth::user()->id.',id',
         ];
 
-    
+
         if(!empty($request->image)){
             $rules['image'] = 'image';
         }
-        
+
         $validator = Validator::make($request->all(),$rules);
 
         if($validator->fails())
@@ -106,12 +106,12 @@ class AccountController extends Controller
         File::delete(public_path('uploads/profile/'.$user->image));
         File::delete(public_path('uploads/profile/thum/'.$user->image));
 
-        
+
         $image = $request->image;
         $ext = $image->getClientOriginalExtension();
         $imageName = time().'.'.$ext;
         $image->move(public_path('uploads/profile'),$imageName);
-        
+
         $user->image = $imageName;
         $user->save();
 

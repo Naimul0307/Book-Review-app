@@ -7,13 +7,13 @@
             <div class="col-md-3">
                 <div class="card border-0 shadow-lg">
                     <div class="card-header  text-white">
-                        Welcome, {{ Auth::user()->name }}                        
+                        Welcome, {{ Auth::user()->name }}
                     </div>
                     <div class="card-body">
                         <div class="text-center mb-3">
-                           @if(Auth::user()->image != "") 
-                           <img src="{{ asset('uploads/profile/thum/'.Auth::user()->image) }}" class="img-fluid rounded-circle" alt="{{ Auth::user()->name }}">  
-                           @endif                    
+                           @if(Auth::user()->image != "")
+                           <img src="{{ asset('uploads/profile/thum/'.Auth::user()->image) }}" class="img-fluid rounded-circle" alt="{{ Auth::user()->name }}">
+                           @endif
                         </div>
                         <div class="h5 text-center">
                             <strong>{{ Auth::user()->name }}  </strong>
@@ -41,7 +41,7 @@
                                 @csrf
                                 <div class="mb-3">
                                     <label for="title" class="form-label">Title</label>
-                                    <input type="text" class="form-control @error('title') is-invalid  
+                                    <input type="text" class="form-control @error('title') is-invalid
                                     @enderror" placeholder="Title" name="title" id="title" value="{{ old('title') }}" />
                                     @error('title')
                                         <p class="invalid-feedback">{{ $message }}</p>
@@ -50,7 +50,7 @@
                                 <div class="mb-3">
                                     <label for="author" class="form-label">Author</label>
                                     <input type="text" class="form-control @error('author') is-invalid
-                                        
+
                                     @enderror" placeholder="Author" value="{{ old('author') }}" name="author" id="author"/>
                                     @error('author')
                                         <p class="invalid-feedback">{{ $message }}</p>
@@ -75,12 +75,12 @@
                                         <option value="0">Block</option>
                                     </select>
                                 </div>
-                                <button class="btn btn-primary mt-2">Create</button>    
-                            </form>                 
+                                <button class="btn btn-primary mt-2">Create</button>
+                            </form>
                         </div>
-                    </div>             
+                    </div>
             </div>
-        </div>       
+        </div>
     </div>
 </section>
 @endsection
