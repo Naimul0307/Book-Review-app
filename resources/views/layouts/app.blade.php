@@ -25,8 +25,8 @@
             </div>
         </div>
         @yield('main')
-        @yield('script')
         <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
         <script src="{{ asset('bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js') }}"></script>
+        @yield('script')
     </body>
 </html>
