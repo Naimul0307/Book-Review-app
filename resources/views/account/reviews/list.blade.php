@@ -16,7 +16,7 @@
                     <div class="d-flex justify-content-end">
                             <form action="" method="get">
                                 <div class="d-flex">
-                                <input type="text" class="form-control" valu="{{ Request::get('keyword') }}" name="keyword" placeholder="Keyword">
+                                <input type="text" class="form-control" value="{{ Request::get('keyword') }}" name="keyword" placeholder="Keyword">
                                 <button type="submit" class="btn btn-primary"> Search </button>
                                 <a href="{{ route('account.reviews') }}" class="btn btn-secondary ms-2">Clear</a>
                                 </div>
@@ -55,7 +55,14 @@
                                         <a href="#" onclick="deleteReview({{ $review->id  }})" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                                     </td>
                                 </tr>
-                                @endforeach
+                                @else
+                                <tr>
+                                    <td colspan="5" style="background-color: crimson; color: #f1f1f1;text-align:center;font-size:20px">
+                                        <strong>
+                                            Reviews Not Found
+                                        </strong>
+                                    </td>
+                                </tr>
                                 @endif
                             </tbody>
                         </thead>

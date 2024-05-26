@@ -11,47 +11,46 @@
                 @include('layouts.message')
                 <div class="card border-0 shadow">
                     <div class="card-header  text-white">
-                        Books
+                        My Reviews
                     </div>
                     <div class="card-body pb-0">
-                        <div class="d-flex justify-content-between">
-                            <a href="{{ route('books.create') }}" class="btn btn-primary">Add Book</a>
+                        <div class="d-flex justify-content-end">
                                 <form action="" method="get">
                                     <div class="d-flex">
                                     <input type="text" class="form-control" value="{{ Request::get('keyword') }}" name="keyword" placeholder="Keyword">
                                     <button type="submit" class="btn btn-primary"> Search </button>
-                                    <a href="{{ route('books.index') }}" class="btn btn-secondary ms-2">Clear</a>
-                                </div>
+                                    <a href="{{ route('account.myReviews') }}" class="btn btn-secondary ms-2">Clear</a>
+                                    </div>
                                 </form>
                         </div>
+                    <div class="card-body pb-0">
                         <table class="table  table-striped mt-3">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Author</th>
+                                    <th>Book</th>
+                                    <th>Review</th>
                                     <th>Rating</th>
                                     <th>Status</th>
-                                    <th width="150">Action</th>
+                                    <th width="100">Action</th>
                                 </tr>
                                 <tbody>
-                                    @if ($books->isNotEmpty())
-                                    @foreach ($books as $book)
+                                    @if($reviews->isNotEmpty())
+                                    @foreach ($reviews as  $review)
                                     <tr>
-                                        <td>{{ $book->title }}</td>
-                                        <td>{{ $book->author }}</td>
-                                        <td>3.0 (3 Reviews)</td>
+                                        <td>{{ $review->book->title }}</td>
+                                        <td>{{ $review->review }}</td>
+                                        <td>{{ $review->rating }}</td>
                                         <td>
-                                            @if ($book->status == 1)
-                                                <span class="text-success">Active</span>
+                                            @if ($review->status == 1)
+                                            <span class="text-success">Active</span>
                                             @else
-                                                <span class="text-danger">Block</span>
+                                            <span class="text-dainge">Block</span>
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-success btn-sm"><i class="fa-regular fa-star"></i></a>
-                                            <a href="{{ route('books.edit',$book->id) }}" class="btn btn-primary btn-sm"><i class="fa-regular fa-pen-to-square"></i>
+                                            <a href="edit-review.html" class="btn btn-primary btn-sm"><i class="fa-regular fa-pen-to-square"></i>
                                             </a>
-                                            <a href="#" onclick="deleteBook({{ $book->id }});" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -59,7 +58,7 @@
                                     <tr>
                                         <td colspan="5" style="background-color: crimson; color: #f1f1f1;text-align:center;font-size:20px">
                                             <strong>
-                                                Books Not Found
+                                                Reviews Not Found
                                             </strong>
                                         </td>
                                     </tr>
@@ -67,34 +66,13 @@
                                 </tbody>
                             </thead>
                         </table>
-                        @if ($books->isNotEmpty())
-                        {{ $books->links() }}
+                        @if ($reviews->isNotEmpty())
+                        {{ $reviews->links() }}
                         @endif
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 </section>
-@endsection
-
-@section('script')
-<script>
-    function deleteBook(id){
-        if(confirm("Are you sure you want to delete")){
-            $.ajax({
-                url:'{{ route("books.destroy") }}',
-                type:'delete',
-                data:{id:id},
-                headers: {
-                    'X-CSRF-TOKEN' : '{{ csrf_token() }}'
-                },
-                success:function(response){
-                    window.location.href = '{{ route("books.index") }}';
-                }
-            });
-        }
-    }
-</script>
 @endsection

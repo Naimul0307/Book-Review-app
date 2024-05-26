@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -129,5 +130,21 @@ class AccountController extends Controller
     public function logout(){
         Auth::logout();
         return redirect()->route('account.login');
+    }
+
+    public function myReviews(Request $request)
+    {
+        $reviews = Review::with('book')->where('user_id',Auth::user()->id);
+        $reviews = $reviews->orderBy('created_at','DESC');
+
+        if (!empty($request->keyword)){
+            $reviews = $reviews->where('review','like','%'.$request->keyword.'%');
+        }
+
+        $reviews = $reviews->paginate(2);
+
+        return view('account.reviews.my_reviews',[
+            'reviews' => $reviews
+        ]);
     }
 }
