@@ -14,7 +14,7 @@
                         Profile
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('update.profile') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('update.profile') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label class="form-label"> Name </label>
@@ -40,7 +40,8 @@
                             @enderror
                             <img src="{{ asset('uploads/profile/thum/'.Auth::user()->image) }}" class="img-fluid mt-4" alt="{{ Auth::user()->name }}" >
                         </div>
-                        <button class="btn btn-primary mt-2">Update</button>  </form>
+                        <button class="btn btn-primary mt-2">Update</button>
+                    </form>
                     </div>
                 </div>
             </div>

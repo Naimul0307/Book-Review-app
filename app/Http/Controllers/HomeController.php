@@ -30,7 +30,7 @@ class HomeController extends Controller
     public function detail($id)
     {
         $book = Book::with(['reviews.user','reviews' =>function($query){
-            $query->where('stauts',1);
+            $query->where('status',1);
         }])->findOrFail($id);
 
         if($book->status == 0) {
