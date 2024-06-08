@@ -29,13 +29,14 @@ class HomeController extends Controller
     //This method will show book details
     public function detail($id)
     {
-        $book = Book::with(['reviews.user','reviews' =>function($query){
+        $book = Book::with(['reviews.user','reviews'=> function($query){
             $query->where('status',1);
         }])->findOrFail($id);
 
         if($book->status == 0) {
             abort(404);
         }
+
         $relatedBooks = Book::where('status',1)->take(3)->where('id' ,'!=' ,$id)->inRandomOrder()->get();
 
         return view('book-detail',[

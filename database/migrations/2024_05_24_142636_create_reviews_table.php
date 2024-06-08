@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('rating');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('book_id')->constrained()->onDelete('cascade');
-            $table->integer('stauts')->default(0);
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

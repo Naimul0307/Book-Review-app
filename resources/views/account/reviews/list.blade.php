@@ -55,9 +55,10 @@
                                         <a href="#" onclick="deleteReview({{ $review->id  }})" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                                     </td>
                                 </tr>
+                                @endforeach
                                 @else
                                 <tr>
-                                    <td colspan="5" style="background-color: crimson; color: #f1f1f1;text-align:center;font-size:20px">
+                                    <td colspan="7" style="background-color: crimson; color: #f1f1f1;text-align:center;font-size:20px">
                                         <strong>
                                             Reviews Not Found
                                         </strong>
