@@ -33,12 +33,10 @@ Route::group(['prefix' => 'account'],function(){
         Route::post('reviews/{id}',[ReviewController::class, 'updateReview'])->name('account.review.update');
         Route::post('delete-reviews',[ReviewController::class, 'deleteReview'])->name('account.review.deleteReview');
 
-        Route::get('my-reviews',[AccountController::class,'myReviews'])->name('account.myReviews');
-        
-        Route::get('my-reviews',[AccountController::class,'myReviews'])->name('account.myReviews');
-        Route::get('edit-my-review/{id}',[AccountController::class,'edit'])->name('account.edit_my_review');
-        Route::post('reviews/{id}',[AccountController::class, 'updateReview'])->name('account.update_my_review');
-        Route::post('delete-reviews',[ReviewController::class, 'deleteReview'])->name('account.review.deleteReview');
+        Route::get('my-eviews',[AccountController::class,'myReviews'])->name('account.myReviews');
+        Route::get('my-eviews/{id}',[AccountController::class,'editMyReview'])->name('account.edit_my_review');
+        Route::post('my-eviews/{id}',[AccountController::class,'updateMyReview'])->name('account.update_my_review');
+        Route::post('delete-my-eviews',[AccountController::class,'deleteMyReview'])->name('account.delete_my_Reviews');
     });
 });
 

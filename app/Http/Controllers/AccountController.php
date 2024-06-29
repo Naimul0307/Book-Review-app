@@ -148,62 +148,61 @@ class AccountController extends Controller
         ]);
     }
 
+        //This method will show edit review page
+        public function editMyReview($id){
+            $review = Review::where([
+                'id' => $id,
+                'user_id' => Auth::user()->id
+            ])->with('book')->first();
 
-    //This method will show edit review page
-    public function edit($id){
-        $review = Review::where([
-            'id' => $id,
-            'user_id' => Auth::user()->id
-        ])->with('book')->first();
-
-        return view('account.my_review.edit_my_review',[
-            'review' => $review
-        ]);
-    }
-
-    
-    //This method use update review
-    public function updateReview($id,Request $request)
-    {
-        $review = Review::findOrFail($id);
-
-        $validator = Validator::make($request->all(),[
-            'review' => 'required',
-            'rating' => 'required'
-        ]);
-
-        if($validator->fails()) {
-            return redirect()->route('account.edit_my_review',$id)->withInput()->withErrors($validator);
+            return view('account.my_review.edit_my_review',[
+                'review' => $review
+            ]);
         }
 
-        $review->review = $request->review;
-        $review->rating = $request->rating;
-        $review->save();
 
-        session()->flash('success','Review update successfully.');
-        return redirect()->route('account.myReviews');
-    }
-
-    
-    public function deleteReview(Request $request)
-    {
-        $id = $request->id;
-        $review = Review::find($id);
-
-
-        if($review == null)
+        //This method use update review
+        public function updateMyReview($id,Request $request)
         {
-            session()->flash('error','Review not Found');
-            return response()->json([
-                'status'=> false
-            ]);
-        } else{
-            $review -> delete();
+            $review = Review::findOrFail($id);
 
-            session()->flash('success','Review Delete Successfully.');
-            return response()->json([
-                'status' => true
+            $validator = Validator::make($request->all(),[
+                'review' => 'required',
+                'rating' => 'required'
             ]);
+
+            if($validator->fails()) {
+                return redirect()->route('account.edit_my_review',$id)->withInput()->withErrors($validator);
+            }
+
+            $review->review = $request->review;
+            $review->rating = $request->rating;
+            $review->save();
+
+            session()->flash('success','Review update successfully.');
+            return redirect()->route('account.myReviews');
         }
-    }
+
+
+        public function deleteMyReview(Request $request)
+        {
+            $id = $request->id;
+            $review = Review::find($id);
+
+
+            if($review == null)
+            {
+                session()->flash('error','Review not Found');
+                return response()->json([
+                    'status'=> false
+                ]);
+            } else{
+                $review -> delete();
+
+                session()->flash('success','Review Delete Successfully.');
+                return response()->json([
+                    'status' => true
+                ]);
+            }
+        }
 }

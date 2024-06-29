@@ -32,7 +32,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="rating" class="form-label @error('rating') is-invalid @enderror">Status</label>
+                                <label for="rating" class="form-label @error('rating') is-invalid @enderror">Rating</label>
                                 <select class="form-control" name="rating" id="rating">
                                     <option value="1" {{ ($review->rating == 1) ? 'selected' : '' }}>1</option>
                                     <option value="2" {{ ($review->rating == 2) ? 'selected' : '' }}>2</option>

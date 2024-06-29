@@ -38,7 +38,7 @@
                                     @endif
                                 </a>
                                 <div class="card-body">
-                                    <h3 class="h4 heading"><a href="{{ route('book.detail',$book->id) }}">{{ $book->title }}</a></h3>
+                                    <h3 class="h4 heading"><a href="#">{{ $book->title }}</a></h3>
                                     <p>by {{ $book->author }}</p>
                                     <div class="star-rating d-inline-flex ml-2" title="">
                                         <span class="rating-text theme-font theme-yellow">5.0</span>

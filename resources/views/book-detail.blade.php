@@ -149,7 +149,7 @@
 
                                             </div>
                                             <div class="content">
-                                                <p>This book does a great job of laying down the framework of how habits are formed, and shares insightful strategies for building good habits and breaking bad ones. Even though I was already familiar with research behind habit formation, reading through this book helped me approach habits I’m trying to adopt or break in my own life from different angles.</p>
+                                                <p>{{ $review->review}}</p>
                                             </div>
                                         </div>
                                     </div>
