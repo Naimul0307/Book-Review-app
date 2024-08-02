@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\ChakeAdmin;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -11,6 +12,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+
+        $middleware->alias([
+            'chake_admin' => ChakeAdmin::class
+        ]);
+
         $middleware->redirectTo(
             guests:'account/login',
             users: 'account/profile'
