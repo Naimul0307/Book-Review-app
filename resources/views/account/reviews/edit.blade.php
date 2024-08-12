@@ -25,9 +25,9 @@
                             </div>
                             <div class="mb-3">
                                 <label for="status" class="form-label @error('status') is-invalid @enderror">Status</label>
-                                <select class="form-control" name="status" id="status">
-                                    <option value="1" {{ ($review->stauts == 1) ? 'selected' : '' }}>Active</option>
-                                    <option value="0" {{ ($review->stauts == 0) ? 'selected' : '' }}>Block</option>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="1" {{ ($review->status == 1) ? 'selected' : ''}}>Active</option>
+                                    <option value="0" {{ ($review->status == 0) ? 'selected' : '' }}>Block</option>
                                 </select>
                                 @error('stauts')
                                     <p class="invalid-feedback">{{ $message }}</p>
